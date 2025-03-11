@@ -1,0 +1,1 @@
+{"version":1,"defects":{"PremierTest::test_exemple1":7,"PremierTest::test_exemple2":7},"times":{"PremierTest::test_exemple1":0,"PremierTest::test_exemple2":0,"ExoTest::test_demo":0.001,"CalculTest::test_addition":0,"PrixTest::test_prixTTC":0,"PrixTest::test_totalFacture":0}}
