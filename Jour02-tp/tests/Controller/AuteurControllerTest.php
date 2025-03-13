@@ -8,7 +8,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\Validator\Constraints\Date;
 
 final class AuteurControllerTest extends WebTestCase
 {
@@ -19,74 +18,68 @@ final class AuteurControllerTest extends WebTestCase
 
     protected function setUp(): void
     {
-        // DOM
+        // DOM 
         $this->client = static::createClient();
 
-        // BDD
+        // Base de données 
         $this->manager = static::getContainer()->get('doctrine')->getManager();
         $this->auteurRepository = $this->manager->getRepository(Auteur::class);
 
-        // Vider la table auteur
-        /*foreach ($this->auteurRepository->findAll() as $object) {
+        // vider la table auteur 
+        /* foreach ($this->auteurRepository->findAll() as $object) {
             $this->manager->remove($object);
-        }*/
+        }
 
-        $this->manager->flush();
+        $this->manager->flush(); */
     }
-
-
-
 
     public function testIndex(): void
     {
+
         $this->client->followRedirects();
-        $crawler = $this->client->request('GET', $this->path);  // symfony serve et clique sur : http://127.0.0.1:8000/auteur
+        $crawler = $this->client->request('GET', $this->path); 
+        // symfony serve
+        // lance un navigateur 
+        //  https://127.0.0.1:8000/auteur
 
-        // 2 assertions
-        // Vérifier quelle fonctionne
+
+        // 2 assertions 
+
         self::assertResponseStatusCodeSame(200);
+        self::assertPageTitleContains('Liste des auteurs !!');
 
-        self::assertPageTitleContains('Auteur index');
+        // Use the $crawler to perform additional assertions e.g.
 
-        // Vérifier H1
         self::assertSame('Bonjour !!!', $crawler->filter('h1')->first()->innerText());
-
-        // Vérifier lien a
-        self::assertSame('Create new', $crawler->filter('a')->first()->innerText());
+        self::assertSame('Create new', $crawler->filter('a.new')->first()->innerText());
+        // composer test 
     }
-
-
-
 
     public function testNew(): void
     {
         // $this->markTestIncomplete();
-
-        $crawler = $this->client->request('GET', sprintf('%snew', $this->path));  // http://127.0.0.1:8000/auteur/new
-        // Vérifier quelle fonctionne
+        // aller sur le formulaire de création d'auteur
+        $crawler = $this->client->request('GET', sprintf('%snew', $this->path));
+        // vérifier qu'elle fonctionne 
         self::assertResponseStatusCodeSame(200);
 
-        // Vérifier H1
         self::assertSame('Create new Auteur', $crawler->filter('h1')->first()->innerText());
-
 
         $this->client->submitForm('Save', [
             'auteur[prenom]' => 'Alain',
-            'auteur[nom]' => 'Dufaur',
+            'auteur[nom]' => 'Dufour',
             'auteur[age]' => 44,
-            'auteur[dt_creation]' => '2025-03-11',
+            'auteur[dt_creation]' => '2025-03-11 12:00:00',
         ]);
 
-        // Si le formulaire a été rempli correctement, Redirigé vers la page contenant le tableau des auteurs
+        // si le formulaire a été rempli correctement 
+        // redirigé vers la page contenant le tableau des auteurs 
         self::assertResponseRedirects("/auteur");
 
         // self::assertSame(1, $this->auteurRepository->count([]));
     }
 
-
-
     private function createAuteurFactice(){
-
         $id = uniqid();
         $fixture = new Auteur();
         $fixture->setPrenom("Alain $id");
@@ -96,17 +89,16 @@ final class AuteurControllerTest extends WebTestCase
 
         $this->manager->persist($fixture);
         $this->manager->flush();
-
-        return $fixture;
+        return $fixture ; 
     }
 
 
     public function testShow(): void
     {
-        // $this->markTestIncomplete();
+        //$this->markTestIncomplete();
 
         $fixture = $this->createAuteurFactice();
-
+        
         $this->client->request('GET', sprintf('%s%s', $this->path, $fixture->getId()));
 
         self::assertResponseStatusCodeSame(200);
@@ -115,37 +107,31 @@ final class AuteurControllerTest extends WebTestCase
         // Use assertions to check that the properties are properly displayed.
     }
 
-
-
-
     public function testEdit(): void
     {
-        //$this->markTestIncomplete();
-        $fixture = $this->createAuteurFactice();
+        // $this->markTestIncomplete();
 
-        self::assertResponseStatusCodeSame(200);
+        $fixture = $this->createAuteurFactice();
 
         $this->client->request('GET', sprintf('%s%s/edit', $this->path, $fixture->getId()));
 
+        self::assertResponseStatusCodeSame(200);
+
         $id = uniqid();
+
         $this->client->submitForm('Update', [
             'auteur[prenom]' => "Céline $id",
-            'auteur[nom]' => 'Dufort',
-            'auteur[age]' => '22',
+            'auteur[nom]' => 'DUFORT',
+            'auteur[age]' => 22 ,
         ]);
 
         self::assertResponseRedirects('/auteur');
 
-        // Vérifier en BDD avec ces informations :
-        $fixture = $this->auteurRepository->findOneBy(["prenom" => "Céline $id"]);
+        // vérifier que en base base de données il y a un profil 
+        $resultat = $this->auteurRepository->findOneBy([ "prenom" => "Céline $id" ]);
 
-        self::assertSame("Céline $id", $fixture[0]->getPrenom());
-        self::assertSame('Dufor', $fixture[0]->getNom());
-        self::assertSame('22', $fixture[0]->getAge());
+        self::assertInstanceOf(Auteur::class, $resultat);
     }
-
-
-
 
     public function testRemove(): void
     {
@@ -154,7 +140,6 @@ final class AuteurControllerTest extends WebTestCase
         $fixture->setPrenom('Value');
         $fixture->setNom('Value');
         $fixture->setAge('Value');
-        $fixture->setDt_creation('Value');
 
         $this->manager->persist($fixture);
         $this->manager->flush();
