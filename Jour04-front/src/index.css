@@ -1,0 +1,18 @@
+.container{
+  margin: 0 auto;
+  width: 1200px;
+  max-width: 90%;
+  display: grid;
+  grid-template-columns: repeat(2,1fr); /* Fraction : 1200 / 2 = 600 - 20 ===> 580 */
+  grid-gap: 20px;
+}
+
+img{
+  max-width: 100%;
+  border-radius: 15px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+h1{
+  grid-column: 1/ -1; /* Toute la largeur de la page */
+}

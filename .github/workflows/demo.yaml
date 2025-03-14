@@ -1,0 +1,15 @@
+name: demo
+# On veut que cette action soit déclenchée lorsque l'on fait un push su le dépôt github
+on:
+  push
+
+# Voici les actions 
+
+jobs:
+  etape1:
+    runs-on: ubuntu-latest
+    steps:
+    -
+      name: Dire Hello
+      run: |
+        echo "Hello !!!"
