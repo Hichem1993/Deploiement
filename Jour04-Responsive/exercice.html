@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Big Title</title>
+    <link rel="stylesheet" href="exo.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .title{
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .user-actions{
+            background-color: #f5f5f5;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items:last baseline;
+            flex-wrap: wrap;
+        }
+
+        .browser-info {
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .viewport-info {
+            font-size: 12px;
+            color: #666;
+        }
+
+
+        .cart-icon {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+
+        .cart-icon span {
+            background-color: #333;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+
+        .search input {
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            width: 200px;
+        }
+
+
+        .main-nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+
+        .hero-banner {
+            padding: 20px;
+        }
+
+        .image-placeholder {
+            border: 1px solid #ccc;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom right, #fff, #f5f5f5);
+        }
+
+        .image-placeholder p {
+            color: #999;
+        }
+
+
+        .intro {
+            padding: 20px;
+        }
+
+        .intro h2 {
+            margin-bottom: 10px;
+        }
+
+
+        .featured-products {
+            padding: 20px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .product-item {
+            margin-bottom: 20px;
+        }
+
+        .product-image {
+            border: 1px solid #ccc;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom right, #fff, #f5f5f5);
+            margin-bottom: 10px;
+        }
+
+        .product-image p {
+            color: #999;
+        }
+
+        .product-item h3 {
+            margin-bottom: 5px;
+        }
+
+        .category {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .price {
+            font-weight: bold;
+        }
+
+
+        footer {
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .quick-links ul {
+            list-style: none;
+            margin-top: 10px;
+        }
+
+        .quick-links ul li {
+            margin-bottom: 5px;
+        }
+
+        .coming-soon-image {
+            border: 1px solid #ccc;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom right, #fff, #f5f5f5);
+            margin-top: 10px;
+        }
+
+        .copyright {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            padding-top: 10px;
+            border-top: 1px solid #ddd;
+        }
+
+        @media (max-width: 1024px) {
+            .product-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-bar {
+                flex-direction: column;
+            }
+            
+            .user-actions {
+                margin-top: 10px;
+            }
+            
+            .main-nav {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 5px 10px;
+            }
+            
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .search input {
+                width: 150px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    
+    <header class="top-bar">
+        <div class="title">
+            
+        <h1>Default / Browser</h1>
+        <p>Viewport: 1024x768 - Grid Width: 940</p>
+    
+        </div>
+        <div class="user-actions">
+            <div class="cart-icon">
+                <span>12</span>
+                <a href="#">My Account</a>
+            </div>
+            <div class="search">
+                <input type="text" placeholder="Enter keywords here...">
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="logo">
+            <h1>A Big Title</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Event</a></li>
+            <li><a href="#">Accessories</a></li>
+            <li><a href="#">Apparel</a></li>
+            <li><a href="#">Featured Items</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero-banner">
+        <div class="image-placeholder">
+            <p>Image Gallery of Featured Products</p>
+        </div>
+    </section>
+
+    <section class="intro">
+        <h2>Intro Copy Headline</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </section>
+
+    <section class="featured-products">
+        <div class="product-grid">
+            <div class="product-item">
+                <div class="product-image">
+                    <p>Image of Featured Product</p>
+                </div>
+                <h3>Item Title</h3>
+                <p class="category">Item Category</p>
+                <p class="price">$88.00</p>
+            </div>
+            <div class="product-item">
+                <div class="product-image">
+                    <p>Image of Featured Product</p>
+                </div>
+                <h3>Item Title</h3>
+                <p class="category">Item Category</p>
+                <p class="price">$99.00</p>
+            </div>
+            <div class="product-item">
+                <div class="product-image">
+                    <p>Image of Featured Product</p>
+                </div>
+                <h3>Item Title</h3>
+                <p class="category">Item Category</p>
+                <p class="price">$99.00</p>
+            </div>
+            <div class="product-item">
+                <div class="product-image">
+                    <p>Image of Featured Product</p>
+                </div>
+                <h3>Item Title</h3>
+                <p class="category">Item Category</p>
+                <p class="price">$99.00</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="quick-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Event</a></li>
+                    <li><a href="#">Support</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="announcements">
+                <h3>Announcements / Promoted Content</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+            <div class="coming-soon">
+                <h3>Coming Soon</h3>
+                <div class="coming-soon-image">
+                    <p>Image of upcoming product</p>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>©2012 AcmeWidgets. All Rights Reserved. Support: Support@AcmeWidgets.com</p>
+        </div>
+    </footer>
+</body>
+</html>

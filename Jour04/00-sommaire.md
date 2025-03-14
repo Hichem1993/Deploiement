@@ -18,3 +18,16 @@ symfony serve
 
 
 2. REACT :
+```sh
+npm create vite
+cd <dossier>
+npm install
+npm run dev
+```
+
+
+Pour l'hebergement :
+```sh
+npm run build
+# Dossier dist il faut l'heberger
+```

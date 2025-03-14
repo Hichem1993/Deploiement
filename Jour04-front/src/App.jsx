@@ -4,8 +4,9 @@ const App = () => {
 
     const [recettes, setRecettes] = useState([]);
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/").then(function(reponse){
-          return reponse.json()
+        fetch(import.meta.env.VITE_URL_API)  // Lien sur le fichier .env
+            .then(function(reponse){
+            return reponse.json()
         })
         .then(function(data){
             setRecettes(data);
